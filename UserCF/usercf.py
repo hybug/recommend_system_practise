@@ -59,7 +59,7 @@ class UserBasedCF():
         print('Build user co-rated movies matrix...')
         for movie, users in movie_user.items():
             for u in users:
-                for v in user:
+                for v in users:
                     if u == v:
                         continue
                     self.user_sim_matrix.setdefault(u, {})
@@ -117,8 +117,8 @@ class UserBasedCF():
         print(f'precison={precision}, recall={recall}, coverage={coverage}')
 
 if __name__ == '__main__':
-    rating_file = '/data/ratings.csv'
-    userCF = UserBasedCF()
+    rating_file = './data/ratings.csv'
+    userCF = UserBasedCF(n_sim_user=20, n_rec_movie=10)
     userCF.get_data(rating_file)
     userCF.calc_user_sim()
     userCF.evaluate()
