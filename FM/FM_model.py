@@ -26,6 +26,7 @@ def vectorize_dic(dic,ix=None,p=None,n=0,g=0):
     for k,lis in dic.items():
         for t in range(len(lis)):
             ix[str(lis[t]) + str(k)] = ix.get(str(lis[t]) + str(k),0) + 1
+            temp = ix[str(lis[t]) + str(k)]
             col_ix[i+t*g] = ix[str(lis[t]) + str(k)]
         i += 1
 

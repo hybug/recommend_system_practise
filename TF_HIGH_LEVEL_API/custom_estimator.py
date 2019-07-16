@@ -1,7 +1,7 @@
 import argparse
 import tensorflow as tf
 
-from recommoend_system.TF_HIGH_LEVEL_API import iris_data
+from recommend_system_practise.TF_HIGH_LEVEL_API import iris_data
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--batch_size', default=100, type=int, help='batch size')
