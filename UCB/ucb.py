@@ -1,7 +1,7 @@
 import numpy as np
 
 # T轮试验
-T = 1000
+T = 100000
 # N个赌博机
 N = 10
 
