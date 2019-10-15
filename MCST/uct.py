@@ -14,8 +14,8 @@ AVAILABLE_CHOICES = [0, 1, 2, 3]
 
 PUCT = 5
 DISPLAY = 1
-EFFORT_BIAS = 0.8
-EFFORT = 800
+EFFORT_BIAS = 0.7
+EFFORT = 120
 FIRST_PLAY = 5
 SECOND_PLAY = 5
 TERMINAL = 2
@@ -52,7 +52,7 @@ def uct_search(node, time_start: float) -> tuple:
 
     for i in range(sys.maxsize):
         time_end = time.time()
-        if time_end - time_start >= 1000:
+        if time_end - time_start >= 10:
             logging.info(f'[uct_search] end time >={10}, '
                          f'using: {time_end - time_start}, run steps: [{i}]')
             break
@@ -221,4 +221,14 @@ from recommend_system_practise.MCST.gridworld import gameEnv
 if __name__ == '__main__':
     game = gameEnv()
     game.reset()
-    move = genmove_uct(game)
+    move_list = []
+    while True:
+        move = genmove_uct(game)
+        print(move)
+
+        game.moveChar(move[0])
+        if game.game_is_over():
+            break
+
+    if game.hero.x == game.goal.x and game.hero.y==game.goal.y:
+        print('True')

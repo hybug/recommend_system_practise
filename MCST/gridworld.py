@@ -18,10 +18,12 @@ class gameOb():
 
 class gameEnv():
     def __init__(self):
-        self.sizeX = 10
-        self.sizeY = 10
+        self.sizeX = 3
+        self.sizeY = 3
         self.actions = 4
         self.objects = []
+        self.hero = None
+        self.goal = None
         self.score = 0
         self.reset()
         # plt.imshow(a, interpolation="nearest")
@@ -38,13 +40,16 @@ class gameEnv():
         self.objects.append(hero)
         bug = gameOb(self.newPosition(), 1, 1, 1, 1, 'goal')
         self.objects.append(bug)
-        for j in range(20):
+        for j in range(2):
             hole = gameOb(self.newPosition(), 1, 1, 0, -1, 'fire')
             self.objects.append(hole)
 
         lst.append([hero.x, hero.y])
         lst.append([bug.x, bug.y])
 
+        if len(self.objects) >= 2:
+            self.hero = self.objects[0]
+            self.goal = self.objects[1]
         # self.objects.append(bug4)
         # state = self.renderEnv()
         # self.state = state
@@ -137,7 +142,7 @@ class gameEnv():
         c = scipy.misc.imresize(a[:, :, 1], [84, 84, 1], interp='nearest')
         d = scipy.misc.imresize(a[:, :, 2], [84, 84, 1], interp='nearest')
         a = np.stack([b, c, d], axis=2)
-        return a
+        plt.imshow(a, interpolation="nearest")
 
     def step(self, action):
         penalty, dis_reward, done = self.moveChar(action)
