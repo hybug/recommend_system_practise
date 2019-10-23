@@ -36,20 +36,22 @@ class gameEnv():
     def reset(self):
         self.objects = []
         lst = []
-        hero = gameOb(self.newPosition(), 1, 1, 2, None, 'hero')
-        self.objects.append(hero)
-        bug = gameOb(self.newPosition(), 1, 1, 1, 1, 'goal')
-        self.objects.append(bug)
-        for j in range(5):
-            hole = gameOb(self.newPosition(), 1, 1, 0, -1, 'fire')
-            self.objects.append(hole)
-
-        # hero = gameOb([1,0], 1, 1, 2, None, 'hero')
+        # hero = gameOb(self.newPosition(), 1, 1, 2, None, 'hero')
         # self.objects.append(hero)
-        # bug = gameOb([1,1], 1, 1, 1, 1, 'goal')
+        # bug = gameOb(self.newPosition(), 1, 1, 1, 1, 'goal')
         # self.objects.append(bug)
-        # hole = gameOb([2,0], 1, 1, 0, -1, 'fire')
-        # self.objects.append(hole)
+        # for j in range(7):
+        #     hole = gameOb(self.newPosition(), 1, 1, 0, -1, 'fire')
+        #     self.objects.append(hole)
+
+        hero = gameOb([0,2], 1, 1, 2, None, 'hero')
+        self.objects.append(hero)
+        bug = gameOb([3,3], 1, 1, 1, 1, 'goal')
+        self.objects.append(bug)
+        hole_lst = [[0,1], [2,1], [4,1], [4,2], [0, 3], [2,3]]
+        for l in hole_lst:
+            hole = gameOb(l, 1, 1, 0, -1, 'fire')
+            self.objects.append(hole)
 
         lst.append([hero.x, hero.y])
         lst.append([bug.x, bug.y])

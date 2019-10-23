@@ -14,8 +14,8 @@ AVAILABLE_CHOICES = [0, 1, 2, 3]
 
 # PUCT = 5
 PUCT = 1 / math.sqrt(2.0)
-DISPLAY = 50
-EFFORT_BIAS = 0.65
+DISPLAY = 10
+EFFORT_BIAS = 0.8
 EFFORT = 120
 FIRST_PLAY = 5
 SECOND_PLAY = 5
@@ -155,6 +155,14 @@ def policy_expand(node: Node) -> None:
     current_state = node.state
     move_list = [0, 1, 2, 3]
     for move in move_list:
+        if move == 0:
+            prob = 0.62
+        elif move == 1:
+            prob = 0.05
+        elif move == 2:
+            prob = 0.05
+        else:
+            prob = 0.28
         construct_node(node, move, 0.25)
 
 def construct_node(node, next_move, prob: float) -> None:
