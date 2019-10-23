@@ -48,7 +48,7 @@ class gameEnv():
         self.objects.append(hero)
         bug = gameOb([3,3], 1, 1, 1, 1, 'goal')
         self.objects.append(bug)
-        hole_lst = [[0,1], [2,1], [4,1], [4,2], [0, 3], [2,3]]
+        hole_lst = [[0,1], [2,2], [4,1], [4,2], [0, 3], [2,3], [4,3], [1,1]]
         for l in hole_lst:
             hole = gameOb(l, 1, 1, 0, -1, 'fire')
             self.objects.append(hole)
@@ -134,38 +134,39 @@ class gameEnv():
             self.score += -1
 
     def renderEnv(self):
-        matrix = np.zeros([self.sizeY, self.sizeX])
-        for obj in self.objects:
-            if obj.name == 'hero':
-                matrix[obj.x][obj.y] = 2
-            elif obj.name == 'goal':
-                matrix[obj.x][obj.y] = 3
-            else:
-                matrix[obj.x][obj.y] = 1
-        print(matrix.transpose())
+        # matrix = np.zeros([self.sizeY, self.sizeX])
+        # for obj in self.objects:
+        #     if obj.name == 'hero':
+        #         matrix[obj.x][obj.y] = 2
+        #     elif obj.name == 'goal':
+        #         matrix[obj.x][obj.y] = 3
+        #     else:
+        #         matrix[obj.x][obj.y] = 1
+        # print(matrix.transpose())
 
-        # a = np.zeros([self.sizeY, self.sizeX, 3])
-        # a = np.ones([self.sizeY+2,self.sizeX+2,3])
-        # a[1:-1, :, :] = 0
-        # a[:, 0, 0] = 1
-        # a[:, -1, 0] = 1
-        # a[0, :, 1:3] = 0
-        # a[-1, :, 1:3] = 0
-        # hero = None
-        # for item in self.objects:
-        #     a[item.y+1:item.y+item.size+1,item.x+1:item.x+item.size+1,item.channel] = item.intensity
-        #     # a[item.y:item.y + item.size, item.x:item.x + item.size, item.channel] = item.intensity
-        #     # if item.name == 'hero':
-        #     #     hero = item
-        # # if self.partial == True:
-        # #     a = a[hero.y:hero.y+3,hero.x:hero.x+3,:]
-        #
-        # # 0-fire 1-goal 2-hero
-        # b = scipy.misc.imresize(a[:, :, 0], [84, 84, 1], interp='nearest')
-        # c = scipy.misc.imresize(a[:, :, 1], [84, 84, 1], interp='nearest')
-        # d = scipy.misc.imresize(a[:, :, 2], [84, 84, 1], interp='nearest')
-        # a = np.stack([b, c, d], axis=2)
-        # plt.imshow(a, interpolation="nearest")
+        a = np.zeros([self.sizeY, self.sizeX, 3])
+        a = np.ones([self.sizeY+2,self.sizeX+2,3])
+        a[1:-1, :, :] = 0
+        a[:, 0, 0] = 1
+        a[:, -1, 0] = 1
+        a[0, :, 1:3] = 0
+        a[-1, :, 1:3] = 0
+        hero = None
+        for item in self.objects:
+            a[item.y+1:item.y+item.size+1,item.x+1:item.x+item.size+1,item.channel] = item.intensity
+            # a[item.y:item.y + item.size, item.x:item.x + item.size, item.channel] = item.intensity
+            # if item.name == 'hero':
+            #     hero = item
+        # if self.partial == True:
+        #     a = a[hero.y:hero.y+3,hero.x:hero.x+3,:]
+
+        # 0-fire 1-goal 2-hero
+        b = scipy.misc.imresize(a[:, :, 0], [84, 84, 1], interp='nearest')
+        c = scipy.misc.imresize(a[:, :, 1], [84, 84, 1], interp='nearest')
+        d = scipy.misc.imresize(a[:, :, 2], [84, 84, 1], interp='nearest')
+        a = np.stack([b, c, d], axis=2)
+        plt.imshow(a, interpolation="nearest")
+        plt.show()
 
     def step(self, action):
         penalty, dis_reward, done = self.moveChar(action)
