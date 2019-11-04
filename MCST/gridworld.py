@@ -44,7 +44,7 @@ class gameEnv():
         #     hole = gameOb(self.newPosition(), 1, 1, 0, -1, 'fire')
         #     self.objects.append(hole)
 
-        hero = gameOb([0,2], 1, 1, 2, None, 'hero')
+        hero = gameOb([1,3], 1, 1, 2, None, 'hero')
         self.objects.append(hero)
         bug = gameOb([3,3], 1, 1, 1, 1, 'goal')
         self.objects.append(bug)

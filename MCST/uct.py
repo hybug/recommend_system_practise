@@ -21,6 +21,7 @@ FIRST_PLAY = 5
 SECOND_PLAY = 5
 TERMINAL = 2
 SILENCE = False
+FLAG = 0
 
 class gameOb():
     def __init__(self, coordinates, size, intensity, channel, reward, name):
@@ -156,14 +157,17 @@ def policy_expand(node: Node) -> None:
     move_list = [0, 1, 2, 3]
     for move in move_list:
         if move == 0:
-            prob = 0.62
+            prob = 0.47
         elif move == 1:
-            prob = 0.05
+            prob = 0.43
         elif move == 2:
             prob = 0.05
         else:
-            prob = 0.28
-        construct_node(node, move, 0.25)
+            prob = 0.05
+        if len(node.children) == 0:
+            construct_node(node, move, prob)
+        else:
+            construct_node(node, move, 0.25)
 
 def construct_node(node, next_move, prob: float) -> None:
     sub_node = Node()
